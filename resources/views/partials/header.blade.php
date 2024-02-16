@@ -16,8 +16,7 @@
                             href="{{ route('comic.index') }}">Comics</a>
                     </li>
                     <li>
-                        <a class="{{ Route::currentRoutename() === 'movies' ? 'navtext' : '' }}"
-                            href="#">Movies</a>
+                        Movies
                     </li>
                     <li>
                         tv
