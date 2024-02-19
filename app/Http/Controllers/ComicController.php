@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ComicController extends Controller
 {
@@ -37,6 +38,17 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'title' => 'required|max:50',
+            'description' => 'required',
+            'thumb' => 'max:255',
+            'price' => 'required|max:10',
+            'serires' => 'required|max:50',
+            'sala_date' => 'required',
+            'type' => 'required|max:50'
+        ]);
+
         $form_data = $request->all();
 
         $comic = new Comic();
@@ -86,6 +98,17 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:50',
+            'description' => 'required',
+            'thumb' => 'max:255',
+            'price' => 'required|max:10',
+            'serires' => 'required|max:50',
+            'sala_date' => 'required',
+            'type' => 'required|max:50'
+        ]);
+
+
         $form_data = $request->all();
 
         $comic = Comic::find($id);
