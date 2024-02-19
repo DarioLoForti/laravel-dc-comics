@@ -12,7 +12,13 @@
                     @foreach ($comics as $comic)
                         <div class="card">
                             <a href="{{ route('comic.show', ['comic' => $comic['id']]) }}">
-                                <img src="{{ $comic['thumb'] }}" alt="{{ $comic['title'] }}">
+                                @if ($comic->thumb == null)
+                                    <img src="https://static.vecteezy.com/ti/vettori-gratis/p3/8216859-vector-omg-comic-text-speech-bubble-color-pop-art-style-effetto-sonoro-vintage-fumetto-poster-sfondo-vettoriale.jpg"
+                                        alt="">
+                                @else
+                                    <img src="{{ $comic['thumb'] }}" alt="{{ $comic['title'] }}">
+                                @endif
+
                                 <h5> {{ $comic['series'] }}</h5>
                             </a>
                         </div>
