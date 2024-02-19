@@ -118,6 +118,15 @@ main{
         top: 380px;
         
     }
+    .btn-end{
+        display: flex;
+        justify-content: center;
+        width: 200px;
+        position: absolute;
+        top: 380px;
+        right: 300px ;
+        
+    }
     .btn{
         display: flex;
         justify-content: center;
@@ -149,7 +158,12 @@ main{
             }
         }
     }
+
+    .form-container{
+        justify-content: center;
+    }
 }
+
 
 
 

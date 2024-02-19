@@ -6,6 +6,7 @@
     <div class="container">
         <div class="row">
             <button class="btn-top">current series</button>
+            <a href="{{ route('comic.create') }}"><button class="btn-end">Add Comic</button></a>
             <div class="col-12">
                 <div class="comic-content">
                     @foreach ($comics as $comic)
