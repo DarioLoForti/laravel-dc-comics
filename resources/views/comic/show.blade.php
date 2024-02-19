@@ -19,6 +19,9 @@
                     <p class="py-3">{{ $comic['description'] }}</p>
                 </div>
                 <div class="col-6">
+                    <a href="{{ route('comic.edit', ['comic' => $comic->id]) }}"><button
+                            class="btn btn-warning btn-end">Edit
+                            Comic</button></a>
                     <img class="mb-5 img-details" src="{{ $comic['thumb'] }}" alt="{{ $comic['title'] }}">
                 </div>
             </div>
