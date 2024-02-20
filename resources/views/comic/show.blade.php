@@ -20,8 +20,14 @@
                 </div>
                 <div class="col-6">
                     <a href="{{ route('comic.edit', ['comic' => $comic->id]) }}"><button
-                            class="btn btn-warning btn-end">Edit
+                            class="btn btn-warning btn-cnt">Edit
                             Comic</button></a>
+                    <form action="{{ route('comic.destroy', ['comic' => $comic->id]) }}" method="POST"
+                        onsubmit="return confirm('Sei sicuro di voler eliminare questo fumetto?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-end">Delete Comic</button>
+                    </form>
                     <img class="mb-5 img-details" src="{{ $comic['thumb'] }}" alt="{{ $comic['title'] }}">
                 </div>
             </div>
