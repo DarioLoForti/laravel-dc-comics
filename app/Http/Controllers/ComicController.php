@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comic;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
@@ -45,7 +46,7 @@ class ComicController extends Controller
             'thumb' => 'max:255',
             'price' => 'required|max:10',
             'serires' => 'required|max:50',
-            'sala_date' => 'required',
+            'sale_date' => 'required',
             'type' => 'required|max:50'
         ]);
 
@@ -98,18 +99,18 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|max:50',
-            'description' => 'required',
-            'thumb' => 'max:255',
-            'price' => 'required|max:10',
-            'serires' => 'required|max:50',
-            'sala_date' => 'required',
-            'type' => 'required|max:50'
-        ]);
+        // $request->validate([
+        //     'title' => 'required|max:50',
+        //     'description' => 'required',
+        //     'thumb' => 'max:255',
+        //     'price' => 'required|max:10',
+        //     'serires' => 'required|max:50',
+        //     'sala_date' => 'required',
+        //     'type' => 'required|max:50'
+        // ]);
 
 
-        $form_data = $request->all();
+        $form_data = $this->validation($request->all());
 
         $comic = Comic::find($id);
         $comic->title = $form_data['title'];
@@ -136,5 +137,38 @@ class ComicController extends Controller
     {
         $comic->delete();
         return redirect()->route('comic.index');
+    }
+
+
+
+    private function validation($data)
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'title' => 'required|max:50',
+                'description' => 'required',
+                'thumb' => 'max:255',
+                'price' => 'required|max:10',
+                'serires' => 'required|max:50',
+                'sale_date' => 'required',
+                'type' => 'required|max:50',
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.max'     => 'Il titolo può contenere al massimo 50 caratteri',
+                'description.required' => 'La descrizione è obbligatoria',
+                'thumb.max'     => 'Il link dell\'immagine può contenere al massimo 255 caratteri',
+                'price.required' => 'Il prezzo è obbligatorio',
+                'price.max'     => 'Il prezzo può contenere al massimo 10 caratteri',
+                'series.required' => 'Il nome della serie è obbligatorio',
+                'series.max'     => 'Il nome della serie può contenere al massimo 50 caratteri',
+                'sale_date.required' => 'La dat di uscita è obbligatoria',
+                'type.required' => 'La tipologgia è obbligatoria',
+                'type.max'     => 'La tipologgia può contenere al massimo 50 caratteri',
+            ]
+        )->validate();
+
+        return $validator;
     }
 }
